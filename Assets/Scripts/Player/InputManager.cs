@@ -3,24 +3,23 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    private Animator animator;
+    [SerializeField] CharacterController controller;
     
-    private float _turnSmoothVelocity;
+    private Animator _animator;
+    private Rigidbody _rb;
     private GameManager _gameManager;
-    
     public Joystick joystick;
-    public CharacterController controller;
    
     public float speed = 6f;
     public float turnSmoothTime = 0.1f;
+    private float _turnSmoothVelocity;
+    private static readonly int Run = Animator.StringToHash("run");
 
-    private Rigidbody _rb;
-    
     private void Awake()
     {
         controller.detectCollisions = false;
         _gameManager = FindObjectOfType<GameManager>();
-        animator = GetComponentInChildren<Animator>();
+        _animator = GetComponentInChildren<Animator>();
         _rb = GetComponent<Rigidbody>();
     }
 
@@ -35,15 +34,15 @@ public class InputManager : MonoBehaviour
 
     private void MoveCharacter()
     {
-        float horizontal = joystick.Horizontal;
-        float vertical = joystick.Vertical;
+        //float horizontal = joystick.Horizontal;
+        //float vertical = joystick.Vertical;
 
-        //float horizontal = Input.GetAxisRaw("Horizontal");
-        //float vertical = Input.GetAxisRaw("Vertical");
+        var horizontal = Input.GetAxisRaw("Horizontal");
+        var vertical = Input.GetAxisRaw("Vertical");
         
-        Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+        var direction = new Vector3(horizontal, 0f, vertical).normalized;
 
-        animator.SetBool("run", direction.magnitude >= 0.1f);
+        _animator.SetBool(Run, direction.magnitude >= 0.1f);
         if (!(direction.magnitude >= 0.1f)) return;
 
         var targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
@@ -51,6 +50,7 @@ public class InputManager : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
         controller.Move(direction * (speed * Time.deltaTime));
+        
     }
 
 }

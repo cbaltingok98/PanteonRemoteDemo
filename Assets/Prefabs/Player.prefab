@@ -962,7 +962,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!143 &7684900734431315306
 CharacterController:
@@ -993,8 +993,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2.267108, z: 1.0389328}
-  m_Center: {x: 0, y: 2.6140537, z: 0.0194664}
+  m_Size: {x: 0.7706816, y: 2.267108, z: 0.688797}
+  m_Center: {x: -0.015714407, y: 2.6140537, z: 0.024475098}
 --- !u!114 &7684900734431315305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1007,8 +1007,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d677a0e26359643e5ae85bbf548a289b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joystick: {fileID: 0}
   controller: {fileID: 7684900734431315306}
+  joystick: {fileID: 0}
   speed: 6
   turnSmoothTime: 0.1
 --- !u!114 &8543905246231231208
@@ -1023,6 +1023,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf6613fd824a44e4a3cf484e1010b69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnPlayer: {fileID: 0}
 --- !u!1 &8289349733105106752
 GameObject:
   m_ObjectHideFlags: 0
