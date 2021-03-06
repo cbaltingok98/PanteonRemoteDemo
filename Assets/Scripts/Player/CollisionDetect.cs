@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using Enums;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,10 +6,15 @@ using UnityEngine.SceneManagement;
 public class CollisionDetect : MonoBehaviour
 {
     [SerializeField] private Transform spawnPlayer;
+    
     private Animator _animator;
     private GameManager _gameManager;
     private Rigidbody _rb;
+    
     private static readonly int Fall = Animator.StringToHash("fall");
+    private static readonly int Run = Animator.StringToHash("run");
+    private static readonly int Die = Animator.StringToHash("die");
+    private static readonly int Idle = Animator.StringToHash("idle");
 
     private void Awake()
     {
@@ -42,14 +46,14 @@ public class CollisionDetect : MonoBehaviour
         else if (other.transform.CompareTag("Finish"))
         {
             _gameManager.SetGameState(GameState.Finish);
-            _animator.SetBool("run", false);
+            _animator.SetBool(Run, false);
         }
     }
 
-    IEnumerator StartLateRestart()
+    private IEnumerator StartLateRestart()
     {
         _gameManager.SetGameState(GameState.Finish);
-        _animator.SetTrigger("die");
+        _animator.SetTrigger(Die);
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene(0);
     }
@@ -57,7 +61,7 @@ public class CollisionDetect : MonoBehaviour
     private void SpawnPlayer()
     {
         _gameManager.SetGameState(GameState.Pause);
-        _animator.SetBool("idle", true);
+        _animator.SetBool(Idle, true);
         transform.position = spawnPlayer.position;
         transform.rotation = Quaternion.identity;
     }

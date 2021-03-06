@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour
 {
@@ -11,6 +8,7 @@ public class FollowPlayer : MonoBehaviour
     
     private void Update()
     {
-        transform.position = new Vector3(target.position.x, target.position.y + offSet, target.position.z + zoffSet);
+        var position = target.position;
+        transform.position = new Vector3(position.x, position.y + offSet, position.z + zoffSet);
     }
 }
