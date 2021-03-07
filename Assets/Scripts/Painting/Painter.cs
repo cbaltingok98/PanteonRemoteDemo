@@ -17,12 +17,19 @@ public class Painter : MonoBehaviour {
 
     private void HandlePaint()
     {
-        if (Input.touchCount > 0)
+        if (Input.touchCount > 0 || Input.GetMouseButtonDown(0))
         {
-            var touch = Input.GetTouch(0);
-
-            var ray = Camera.main.ScreenPointToRay(touch.position);
-            
+            Ray ray;
+            if (_gameManager.IsKeyboard())
+            {
+                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            }
+            else
+            {
+                var touch = Input.GetTouch(0);
+                ray = Camera.main.ScreenPointToRay(touch.position);
+            }
+      
             if (Physics.Raycast(ray, out var hitInfo))
             {
                 var rig = hitInfo.collider;

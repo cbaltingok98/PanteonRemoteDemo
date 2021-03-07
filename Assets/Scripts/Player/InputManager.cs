@@ -15,6 +15,9 @@ public class InputManager : MonoBehaviour
     private float _turnSmoothVelocity;
     private static readonly int Run = Animator.StringToHash("run");
 
+    private float _horizontal;
+    private float _vertical;
+
     private void Awake()
     {
         controller.detectCollisions = false;
@@ -33,13 +36,18 @@ public class InputManager : MonoBehaviour
 
     private void MoveCharacter()
     {
-        var horizontal = joystick.Horizontal;
-        var vertical = joystick.Vertical;
-
-        //var horizontal = Input.GetAxisRaw("Horizontal");
-        //var vertical = Input.GetAxisRaw("Vertical");
+        if (_gameManager.IsKeyboard())
+        {
+            _horizontal = Input.GetAxisRaw("Horizontal");
+            _vertical = Input.GetAxisRaw("Vertical");
+        }
+        else
+        {
+            _horizontal = joystick.Horizontal;
+            _vertical = joystick.Vertical;
+        }
         
-        var direction = new Vector3(horizontal, 0f, vertical).normalized;
+        var direction = new Vector3(_horizontal, 0f, _vertical).normalized;
 
         _animator.SetBool(Run, direction.magnitude >= 0.1f);
         if (!(direction.magnitude >= 0.1f)) return;

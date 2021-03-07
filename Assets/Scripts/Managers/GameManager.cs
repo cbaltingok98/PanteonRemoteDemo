@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Enums;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,6 +13,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject painter;
     [SerializeField] private GameObject paintWall;
     
+    private bool _useKeyboard;
+
     private void Awake()
     {
         _gameState = GameState.Pause;
@@ -19,6 +22,20 @@ public class GameManager : MonoBehaviour
         
         painter.SetActive(false);
         paintWall.SetActive(false);
+    }
+
+    private void Start()
+    {
+#if UNITY_EDITOR
+        _useKeyboard = true;
+#else
+        _useKeyboard = false;        
+#endif
+    }
+
+    public bool IsKeyboard()
+    {
+        return _useKeyboard;
     }
 
     public GameState GetCurrentState()
