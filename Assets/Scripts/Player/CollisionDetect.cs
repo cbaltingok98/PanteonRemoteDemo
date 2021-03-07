@@ -15,6 +15,7 @@ public class CollisionDetect : MonoBehaviour
     private static readonly int Run = Animator.StringToHash("run");
     private static readonly int Die = Animator.StringToHash("die");
     private static readonly int Idle = Animator.StringToHash("idle");
+    
 
     private void Awake()
     {
@@ -35,8 +36,9 @@ public class CollisionDetect : MonoBehaviour
         {
             _gameManager.SetGameState(GameState.Finish);
             _animator.SetBool(Fall, true);
-            _rb.useGravity = true;
+
             var fallSide = other.transform.name == "FallLeft" ? -5f : 5f;
+            _rb.useGravity = true;
             _rb.velocity = new Vector3(fallSide, 5f, 0f);
         }
         else if (other.transform.CompareTag("RestartLevel"))
@@ -45,11 +47,17 @@ public class CollisionDetect : MonoBehaviour
         }
         else if (other.transform.CompareTag("Finish"))
         {
-            _gameManager.SetGameState(GameState.Finish);
-            _animator.SetBool(Run, false);
+            FinishSequence();
         }
     }
-
+    
+    private void FinishSequence()
+    {
+        _animator.SetBool(Run, false);
+        _gameManager.SetGameState(GameState.Paint);
+        GetComponent<StartPainting>().StartPaintSequence();
+    }
+    
     private IEnumerator StartLateRestart()
     {
         _gameManager.SetGameState(GameState.Finish);
@@ -57,7 +65,7 @@ public class CollisionDetect : MonoBehaviour
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene(0);
     }
-
+    
     private void SpawnPlayer()
     {
         _gameManager.SetGameState(GameState.Pause);

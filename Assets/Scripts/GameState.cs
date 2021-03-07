@@ -4,7 +4,8 @@
     {
         Pause,
         Play,
-        Finish
+        Finish,
+        Paint
     }
 
 }

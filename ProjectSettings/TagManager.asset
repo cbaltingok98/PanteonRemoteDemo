@@ -9,6 +9,8 @@ TagManager:
   - Mover
   - Fall
   - RestartLevel
+  - Paintable
+  - Painted
   layers:
   - Default
   - TransparentFX

@@ -1,0 +1,37 @@
+﻿using UnityEngine;
+
+public class Painter : MonoBehaviour {
+
+    public Material hitMaterial;
+    private GameManager _gameManager;
+
+    private void Awake()
+    {
+        _gameManager = FindObjectOfType<GameManager>();
+    }
+
+    void Update ()
+    {
+        HandlePaint();
+    }
+
+    private void HandlePaint()
+    {
+        if (Input.touchCount > 0)
+        {
+            var touch = Input.GetTouch(0);
+
+            var ray = Camera.main.ScreenPointToRay(touch.position);
+            
+            if (Physics.Raycast(ray, out var hitInfo))
+            {
+                var rig = hitInfo.collider;
+                if (!rig.gameObject.CompareTag("Paintable")) return;
+                
+                rig.gameObject.tag = "Painted";
+                rig.GetComponent<MeshRenderer>().material = hitMaterial;
+                rig.GetComponentInParent<PaintWall>().UpdatePercentage();
+            }
+        }
+    }
+}

@@ -1,4 +1,5 @@
-﻿using Enums;
+﻿using System;
+using Enums;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
@@ -6,7 +7,6 @@ public class InputManager : MonoBehaviour
     [SerializeField] CharacterController controller;
     
     private Animator _animator;
-    private Rigidbody _rb;
     private GameManager _gameManager;
     public Joystick joystick;
    
@@ -20,7 +20,6 @@ public class InputManager : MonoBehaviour
         controller.detectCollisions = false;
         _gameManager = FindObjectOfType<GameManager>();
         _animator = GetComponentInChildren<Animator>();
-        _rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
@@ -34,11 +33,11 @@ public class InputManager : MonoBehaviour
 
     private void MoveCharacter()
     {
-        //float horizontal = joystick.Horizontal;
-        //float vertical = joystick.Vertical;
+        var horizontal = joystick.Horizontal;
+        var vertical = joystick.Vertical;
 
-        var horizontal = Input.GetAxisRaw("Horizontal");
-        var vertical = Input.GetAxisRaw("Vertical");
+        //var horizontal = Input.GetAxisRaw("Horizontal");
+        //var vertical = Input.GetAxisRaw("Vertical");
         
         var direction = new Vector3(horizontal, 0f, vertical).normalized;
 
