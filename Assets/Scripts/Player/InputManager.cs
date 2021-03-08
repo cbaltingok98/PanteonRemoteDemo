@@ -5,11 +5,13 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     [SerializeField] CharacterController controller;
+    public GameState playerState;
     
     private Animator _animator;
     private GameManager _gameManager;
+    private Rigidbody _rb;
     public Joystick joystick;
-   
+
     public float speed = 6f;
     public float turnSmoothTime = 0.1f;
     private float _turnSmoothVelocity;
@@ -20,18 +22,24 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
+        playerState = GameState.Pause;
         controller.detectCollisions = false;
+        _rb = GetComponent<Rigidbody>();
         _gameManager = FindObjectOfType<GameManager>();
         _animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
     {
-        if(_gameManager.GetCurrentState() == GameState.Play)
+        if(playerState == GameState.Play && _gameManager.GetCurrentState() == GameState.Play)
             MoveCharacter();
 
-        if (_gameManager.GetCurrentState() == GameState.Pause && (Input.touchCount > 0 || Input.GetKeyDown(KeyCode.Space))) 
+        if (playerState == GameState.Pause && (Input.touchCount > 0 || Input.GetKeyDown(KeyCode.Space)))
+        {
             _gameManager.SetGameState(GameState.Play);
+            playerState = GameState.Play;
+        }
+        
     }
 
     private void MoveCharacter()
@@ -46,9 +54,9 @@ public class InputManager : MonoBehaviour
             _horizontal = joystick.Horizontal;
             _vertical = joystick.Vertical;
         }
-        
-        var direction = new Vector3(_horizontal, 0f, _vertical).normalized;
 
+        var direction = new Vector3(_horizontal, 0f, _vertical).normalized;
+        
         _animator.SetBool(Run, direction.magnitude >= 0.1f);
         if (!(direction.magnitude >= 0.1f)) return;
 
@@ -57,6 +65,7 @@ public class InputManager : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
         controller.Move(direction * (speed * Time.deltaTime));
+        //_rb.AddForce(direction * (speed * Time.deltaTime));
     }
 
 }
