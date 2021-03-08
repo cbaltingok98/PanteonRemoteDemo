@@ -38,9 +38,9 @@ public class RestartLevel : MonoBehaviour
 
     private void RestartSequence()
     {
+        SetPosition();
         SetRigidBody();
         SetAnimation();
-        SetPosition();
         _inputManager.playerState = GameState.Play;
     }
     
@@ -64,6 +64,7 @@ public class RestartLevel : MonoBehaviour
     {
         _animator.SetBool(Run, false);
         _animator.SetTrigger(Restart);
+        Debug.Log("Restarting");
     }
     
     private void SetPosition()

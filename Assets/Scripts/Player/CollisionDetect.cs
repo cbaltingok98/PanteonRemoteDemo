@@ -25,6 +25,7 @@ public class CollisionDetect : MonoBehaviour
     {
         if (other.transform.CompareTag("Obstacle"))
         {
+            Debug.Log("Obstacle");
             _animator.SetTrigger(Die);
             _restartLevel.StartCoroutine(nameof(RestartLevel.StartLateRestart));
         }
@@ -40,13 +41,9 @@ public class CollisionDetect : MonoBehaviour
         else if (other.transform.CompareTag("Finish"))
         {
             if (_inputManager.isPlayer)
-            {
-                _restartLevel.FinishSequence();    
-            }
+                _restartLevel.FinishSequence();
             else
-            {
                 _gameManager.AIVictory();
-            }
         }
     }
 

@@ -1,16 +1,13 @@
-﻿using System;
-using Enums;
+﻿using Enums;
 using UnityEngine;
 
-public class InputManager : MonoBehaviour
+public class OpponetMovement : MonoBehaviour
 {
     [SerializeField] CharacterController controller;
     [HideInInspector] public GameState playerState;
     
     private Animator _animator;
     private GameManager _gameManager;
-    private Rigidbody _rb;
-    public Joystick joystick;
 
     public float speed = 6f;
     public float turnSmoothTime = 0.1f;
@@ -26,29 +23,18 @@ public class InputManager : MonoBehaviour
     {
         playerState = GameState.Pause;
         controller.detectCollisions = false;
-        _rb = GetComponent<Rigidbody>();
         _gameManager = FindObjectOfType<GameManager>();
         _animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
     {
-        if(playerState == GameState.Play && _gameManager.GetCurrentState() == GameState.Play)
+        if (playerState == GameState.Play && _gameManager.GetCurrentState() == GameState.Play)
             MoveCharacter();
-
-        if (playerState == GameState.Pause && (Input.touchCount > 0 || Input.GetKeyDown(KeyCode.Space)))
-        {
-            _gameManager.SetGameState(GameState.Play);
-            playerState = GameState.Play;
-        }
-        
     }
 
     private void MoveCharacter()
     {
-        if(isPlayer)
-            GetInput();
-
         var direction = new Vector3(_horizontal, 0f, _vertical).normalized;
         
         _animator.SetBool(Run, direction.magnitude >= 0.1f);
@@ -59,20 +45,6 @@ public class InputManager : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
         controller.Move(direction * (speed * Time.deltaTime));
-        //_rb.AddForce(direction * (speed * Time.deltaTime));
     }
 
-    private void GetInput()
-    {
-        if (_gameManager.IsKeyboard())
-        {
-            _horizontal = Input.GetAxisRaw("Horizontal");
-            _vertical = Input.GetAxisRaw("Vertical");
-        }
-        else
-        {
-            _horizontal = joystick.Horizontal;
-            _vertical = joystick.Vertical;
-        }
-    }
 }
