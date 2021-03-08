@@ -53,6 +53,12 @@ public class GameManager : MonoBehaviour
         painter.SetActive(set);
     }
 
+    public void AIVictory()
+    {
+        _gameState = GameState.Finish;
+
+    }
+
     public void EndLevel()
     {
         _gameState = GameState.Finish;

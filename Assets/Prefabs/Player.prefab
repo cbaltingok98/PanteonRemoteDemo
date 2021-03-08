@@ -1014,6 +1014,7 @@ MonoBehaviour:
   joystick: {fileID: 0}
   speed: 6
   turnSmoothTime: 0.1
+  isPlayer: 1
 --- !u!114 &8543905246231231208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1026,6 +1027,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf6613fd824a44e4a3cf484e1010b69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayer: 0
 --- !u!114 &1736773174
 MonoBehaviour:
   m_ObjectHideFlags: 0

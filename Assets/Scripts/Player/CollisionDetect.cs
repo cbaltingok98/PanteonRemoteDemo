@@ -4,8 +4,10 @@ public class CollisionDetect : MonoBehaviour
 {
     private Animator _animator;
     private Rigidbody _rb;
+    private InputManager _inputManager;
     private RestartLevel _restartLevel;
-    
+    private GameManager _gameManager;
+
     private static readonly int Fall = Animator.StringToHash("fall");
     private static readonly int Die = Animator.StringToHash("die");
 
@@ -14,7 +16,9 @@ public class CollisionDetect : MonoBehaviour
     {
         _animator = GetComponentInChildren<Animator>();
         _rb = GetComponent<Rigidbody>();
+        _inputManager = GetComponent<InputManager>();
         _restartLevel = GetComponent<RestartLevel>();
+        _gameManager = FindObjectOfType<GameManager>();
     }
 
     private void OnCollisionEnter(Collision other)
@@ -35,7 +39,14 @@ public class CollisionDetect : MonoBehaviour
         }
         else if (other.transform.CompareTag("Finish"))
         {
-            _restartLevel.FinishSequence();
+            if (_inputManager.isPlayer)
+            {
+                _restartLevel.FinishSequence();    
+            }
+            else
+            {
+                _gameManager.AIVictory();
+            }
         }
     }
 

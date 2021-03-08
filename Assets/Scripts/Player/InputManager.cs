@@ -20,6 +20,8 @@ public class InputManager : MonoBehaviour
     private float _horizontal;
     private float _vertical;
 
+    public bool isPlayer;
+
     private void Awake()
     {
         playerState = GameState.Pause;
@@ -44,16 +46,8 @@ public class InputManager : MonoBehaviour
 
     private void MoveCharacter()
     {
-        if (_gameManager.IsKeyboard())
-        {
-            _horizontal = Input.GetAxisRaw("Horizontal");
-            _vertical = Input.GetAxisRaw("Vertical");
-        }
-        else
-        {
-            _horizontal = joystick.Horizontal;
-            _vertical = joystick.Vertical;
-        }
+        if(isPlayer)
+            GetInput();
 
         var direction = new Vector3(_horizontal, 0f, _vertical).normalized;
         
@@ -68,4 +62,17 @@ public class InputManager : MonoBehaviour
         //_rb.AddForce(direction * (speed * Time.deltaTime));
     }
 
+    private void GetInput()
+    {
+        if (_gameManager.IsKeyboard())
+        {
+            _horizontal = Input.GetAxisRaw("Horizontal");
+            _vertical = Input.GetAxisRaw("Vertical");
+        }
+        else
+        {
+            _horizontal = joystick.Horizontal;
+            _vertical = joystick.Vertical;
+        }
+    }
 }
