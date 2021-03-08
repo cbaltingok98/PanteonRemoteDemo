@@ -41,7 +41,7 @@ public class RestartLevel : MonoBehaviour
         SetPosition();
         SetRigidBody();
         SetAnimation();
-        _inputManager.playerState = GameState.Play;
+        _inputManager.playerState = GameState.Pause;
     }
     
     public void FinishSequence()
