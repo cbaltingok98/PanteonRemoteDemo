@@ -531,6 +531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 285818543}
+  playerState: 0
   joystick: {fileID: 311783716}
   speed: 6
   turnSmoothTime: 0.1
@@ -3184,6 +3185,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 963194227}
   paintingPosition: {fileID: 1143348260}
+--- !u!114 &1736773175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736773168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef2a148b38291417f89f0eb524ba1d66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1805577315
 GameObject:
   m_ObjectHideFlags: 0
@@ -5474,7 +5487,7 @@ PrefabInstance:
     - target: {fileID: 247691214553174556, guid: c35b50dedb1ab4fd68db76ce20e5605f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.08
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 247691214553174556, guid: c35b50dedb1ab4fd68db76ce20e5605f,
         type: 3}
@@ -5531,6 +5544,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.4072757
       objectReference: {fileID: 0}
+    - target: {fileID: 247691214553174556, guid: c35b50dedb1ab4fd68db76ce20e5605f,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.053076
+      objectReference: {fileID: 0}
     - target: {fileID: 8250558012294808509, guid: c35b50dedb1ab4fd68db76ce20e5605f,
         type: 3}
       propertyPath: m_Name
@@ -5566,8 +5584,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.6170636, y: 0.20755005, z: 0.8069308}
-  m_Center: {x: 0.50916874, y: 0.016336441, z: -0.2765766}
+  m_Size: {x: 1.6170636, y: 17.116932, z: 0.8069308}
+  m_Center: {x: 0.50916874, y: 6.7894435, z: -0.2765766}
 --- !u!4 &7713376861738200139
 Transform:
   m_ObjectHideFlags: 0

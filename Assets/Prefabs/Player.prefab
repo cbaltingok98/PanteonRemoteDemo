@@ -926,6 +926,8 @@ GameObject:
   - component: {fileID: 1451937696}
   - component: {fileID: 7684900734431315305}
   - component: {fileID: 8543905246231231208}
+  - component: {fileID: 1736773174}
+  - component: {fileID: 1736773175}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -959,10 +961,10 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!143 &7684900734431315306
 CharacterController:
@@ -1008,6 +1010,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 7684900734431315306}
+  playerState: 0
   joystick: {fileID: 0}
   speed: 6
   turnSmoothTime: 0.1
@@ -1023,7 +1026,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf6613fd824a44e4a3cf484e1010b69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPlayer: {fileID: 0}
+--- !u!114 &1736773174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7684900734431315299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8849cb831db3d4bed96ed8165ad69eba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  paintingPosition: {fileID: 0}
+--- !u!114 &1736773175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7684900734431315299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef2a148b38291417f89f0eb524ba1d66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8289349733105106752
 GameObject:
   m_ObjectHideFlags: 0

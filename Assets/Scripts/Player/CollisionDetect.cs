@@ -3,24 +3,17 @@
 public class CollisionDetect : MonoBehaviour
 {
     private Animator _animator;
-    private GameManager _gameManager;
     private Rigidbody _rb;
-    private InputManager _inputManager;
     private RestartLevel _restartLevel;
     
     private static readonly int Fall = Animator.StringToHash("fall");
-    private static readonly int Run = Animator.StringToHash("run");
     private static readonly int Die = Animator.StringToHash("die");
-    private static readonly int Idle = Animator.StringToHash("idle");
-    private static readonly int Restart = Animator.StringToHash("restart");
 
 
     private void Awake()
     {
         _animator = GetComponentInChildren<Animator>();
-        _gameManager = FindObjectOfType<GameManager>();
         _rb = GetComponent<Rigidbody>();
-        _inputManager = GetComponent<InputManager>();
         _restartLevel = GetComponent<RestartLevel>();
     }
 

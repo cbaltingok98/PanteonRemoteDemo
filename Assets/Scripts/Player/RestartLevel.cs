@@ -56,8 +56,8 @@ public class RestartLevel : MonoBehaviour
     {
         _rb.velocity = new Vector3(0f, 0f, 0f);
         _rb.useGravity = false;
-        _rb.constraints = RigidbodyConstraints.FreezeRotation;
         _rb.constraints = RigidbodyConstraints.FreezePositionY;
+        _rb.freezeRotation = true;
     }
     
     private void SetAnimation()
