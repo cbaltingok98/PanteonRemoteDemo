@@ -76,4 +76,10 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+
+    [ContextMenu("Play State")]
+    public void ChangeStatePlay()
+    {
+        _gameState = GameState.Play;
+    }
 }

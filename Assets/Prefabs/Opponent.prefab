@@ -159,10 +159,10 @@ GameObject:
   - component: {fileID: 2354013857659027842}
   - component: {fileID: 2354013857659027843}
   - component: {fileID: 2354013857659027844}
-  - component: {fileID: 2354013857659027840}
-  - component: {fileID: 2354013857659027845}
-  - component: {fileID: 2354013857659027871}
-  - component: {fileID: 2354013857659027841}
+  - component: {fileID: 898674571942894036}
+  - component: {fileID: 4449170471081495890}
+  - component: {fileID: 285818538}
+  - component: {fileID: 285818539}
   m_Layer: 0
   m_Name: Opponent
   m_TagString: Untagged
@@ -212,27 +212,9 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0161297, y: 2.3960683, z: 1.5189153}
-  m_Center: {x: -0.0065786764, y: 0.15820456, z: 0.20721525}
---- !u!143 &2354013857659027840
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2354013857659027846}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2354013857659027845
+  m_Size: {x: 1.0161297, y: 2.3960683, z: 1.1599618}
+  m_Center: {x: -0.0065786764, y: 0.15820456, z: 0.027738512}
+--- !u!114 &898674571942894036
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -241,16 +223,50 @@ MonoBehaviour:
   m_GameObject: {fileID: 2354013857659027846}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d677a0e26359643e5ae85bbf548a289b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 2354013857659027840}
-  playerState: 0
-  joystick: {fileID: 0}
-  speed: 6
+  m_BrainParameters:
+    VectorObservationSize: 23
+    NumStackedVectorObservations: 1
+    VectorActionSize: 0300000003000000
+    VectorActionDescriptions: []
+    VectorActionSpaceType: 0
+  m_Model: {fileID: 0}
+  m_InferenceDevice: 0
+  m_BehaviorType: 0
+  m_BehaviorName: RunToFinish
+  TeamId: 0
+  m_UseChildSensors: 1
+--- !u!114 &4449170471081495890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2354013857659027846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b61c33800cb343bb84cb5f70486bfe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 1200
+  targetPosition: {fileID: 0}
+  staticObstacles:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  dynamicObjects:
+  - {fileID: 0}
+  - {fileID: 0}
   turnSmoothTime: 0.1
-  isPlayer: 0
---- !u!114 &2354013857659027871
+--- !u!114 &285818538
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -259,10 +275,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2354013857659027846}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edf6613fd824a44e4a3cf484e1010b69, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2354013857659027841
+  DecisionPeriod: 5
+  TakeActionsBetweenDecisions: 1
+--- !u!114 &285818539
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -271,9 +289,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2354013857659027846}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef2a148b38291417f89f0eb524ba1d66, type: 3}
+  m_Script: {fileID: 11500000, guid: f2902496c0120472b90269f94a0aec7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Record: 0
+  DemonstrationName: RunToFinishDone
+  DemonstrationDirectory: Demos
 --- !u!1 &2711519569267187690
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject menu;
     [SerializeField] private GameObject inGameUI;
     [SerializeField] private GameObject wallFillPercentTxt;
-    
+    [SerializeField] private Text currentRank;
     private void Start()
     {
         StartLevel();
@@ -41,5 +41,10 @@ public class UIManager : MonoBehaviour
     public void WallPercentUpdate(string updatedText)
     {
         wallFillPercentTxt.GetComponentInChildren<Text>().text = updatedText;
+    }
+
+    public void UpdateRankText(string rank)
+    {
+        currentRank.text = "#" + rank;
     }
 }

@@ -51,7 +51,6 @@ public class CollisionDetect : MonoBehaviour
     {
         _animator.SetTrigger(Fall);
         var fallSide = other.transform.name == "FallLeft" ? -5f : 5f;
-        _rb.useGravity = true;
         _rb.constraints = RigidbodyConstraints.None;
         _rb.velocity = new Vector3(fallSide, 5f, 0f);
     }

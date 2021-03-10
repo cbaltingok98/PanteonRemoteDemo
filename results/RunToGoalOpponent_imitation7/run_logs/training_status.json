@@ -1,0 +1,29 @@
+{
+    "RunToFinish": {
+        "checkpoints": [
+            {
+                "steps": 499967,
+                "file_path": "results/RunToGoalOpponent_imitation7/RunToFinish/RunToFinish-499967.onnx",
+                "reward": -1.2659524115068572,
+                "creation_time": 1615340294.898192
+            },
+            {
+                "steps": 500303,
+                "file_path": "results/RunToGoalOpponent_imitation7/RunToFinish/RunToFinish-500303.onnx",
+                "reward": -1.1849242577498609,
+                "creation_time": 1615340295.000045
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 500303,
+            "file_path": "results/RunToGoalOpponent_imitation7/RunToFinish.onnx",
+            "reward": -1.1849242577498609,
+            "creation_time": 1615340295.000045
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.2.0",
+        "mlagents_version": "0.24.0",
+        "torch_version": "1.7.1"
+    }
+}

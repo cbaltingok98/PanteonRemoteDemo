@@ -1,0 +1,23 @@
+{
+    "RunToFinish": {
+        "checkpoints": [
+            {
+                "steps": 453343,
+                "file_path": "results/RunToGoalOpponent_imitation/RunToFinish/RunToFinish-453343.onnx",
+                "reward": null,
+                "creation_time": 1615344977.501968
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 453343,
+            "file_path": "results/RunToGoalOpponent_imitation/RunToFinish.onnx",
+            "reward": null,
+            "creation_time": 1615344977.501968
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.2.0",
+        "mlagents_version": "0.24.0",
+        "torch_version": "1.7.1"
+    }
+}
