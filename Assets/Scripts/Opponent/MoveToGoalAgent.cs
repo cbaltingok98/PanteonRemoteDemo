@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using Enums;
 using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
@@ -7,11 +6,10 @@ using UnityEngine;
 
 public class MoveToGoalAgent : Agent
 {
-    private GameState agentState;
+    private GameState _agentState;
     
-    [SerializeField] private Transform targetPosition;
-    [SerializeField] private Transform[] staticObstacles;
-    [SerializeField] private Transform[] dynamicObjects;
+    private GameObject _targetPosition;
+    private GameObject[] _obstacles;
 
     private Rigidbody _rb;
     private Animator _animator;
@@ -38,6 +36,8 @@ public class MoveToGoalAgent : Agent
     private void Start()
     {
         _rb.isKinematic = true;
+        _obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
+        _targetPosition = GameObject.FindWithTag("Finish");
     }
 
     private void Update()
@@ -50,26 +50,19 @@ public class MoveToGoalAgent : Agent
     {
         _animator.SetTrigger(Restart);
         transform.position = new Vector3(UnityEngine.Random.Range(-5f,5f), 0.7f, -17.45f);
-        agentState = GameState.Play;
+        _agentState = GameState.Play;
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
         sensor.AddObservation(transform.position);
-        var dirToFinish = (targetPosition.localPosition - transform.localPosition).normalized;
+        var dirToFinish = (_targetPosition.transform.localPosition - transform.localPosition).normalized;
         sensor.AddObservation(dirToFinish.x);
         sensor.AddObservation(dirToFinish.z);
 
-        foreach (var obstacle in staticObstacles)
+        foreach (var obstacle in _obstacles)
         {
-            var dirToObject = (obstacle.localPosition - transform.localPosition).normalized;
-            sensor.AddObservation(dirToObject.x);
-            sensor.AddObservation(dirToObject.z);
-        }
-        
-        foreach (var obstacle in dynamicObjects)
-        {
-            var dirToObject = (obstacle.localPosition - transform.localPosition).normalized;
+            var dirToObject = (obstacle.transform.localPosition - transform.localPosition).normalized;
             sensor.AddObservation(dirToObject.x);
             sensor.AddObservation(dirToObject.z);
         }
@@ -96,7 +89,7 @@ public class MoveToGoalAgent : Agent
             case 2: addForce.z = 1f; break;
         }
         
-        if(agentState == GameState.Play && _gameManager.GetCurrentState() == GameState.Play)
+        if(_agentState == GameState.Play && _gameManager.GetCurrentState() == GameState.Play)
             HandleMovement(addForce);
 
         AddReward(-1f / MaxStep);
@@ -175,7 +168,7 @@ public class MoveToGoalAgent : Agent
 
     IEnumerator LateRestart()
     {
-        agentState = GameState.Restart;
+        _agentState = GameState.Restart;
         _animator.SetTrigger(Die);
         yield return new WaitForSeconds(2f);
         EndEpisode();

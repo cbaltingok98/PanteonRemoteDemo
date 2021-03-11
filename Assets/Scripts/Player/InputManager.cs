@@ -21,7 +21,6 @@ public class InputManager : MonoBehaviour
     private float _horizontal;
     private float _vertical;
 
-    public bool isPlayer;
     public float movePlayerSpeed;
 
     private void Awake()
@@ -54,9 +53,7 @@ public class InputManager : MonoBehaviour
 
     private void MoveCharacter()
     {
-        if(isPlayer)
-           GetInput();
-
+        GetInput();
         //HandleJoystick();
         addForce.x = _horizontal;
         addForce.z = _vertical;
