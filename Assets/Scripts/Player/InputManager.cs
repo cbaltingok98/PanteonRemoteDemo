@@ -1,6 +1,4 @@
-﻿using System;
-using System.Runtime.CompilerServices;
-using Enums;
+﻿using Enums;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour

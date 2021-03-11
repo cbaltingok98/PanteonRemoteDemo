@@ -1,5 +1,4 @@
-﻿using System;
-using Enums;
+﻿using Enums;
 using UnityEngine;
 
 public class RankingManager : MonoBehaviour
@@ -10,7 +9,6 @@ public class RankingManager : MonoBehaviour
     private UIManager _uiManager;
     private GameManager _gameManager;
 
-    private bool _loadOpponent;
     private int _currentRank;
     private void Awake()
     {

@@ -40,15 +40,6 @@ public class MoveToGoalAgent : Agent
     private void Start()
     {
         _rb.isKinematic = true;
-        if (_obstacles == null)
-        {
-            Debug.Log("NO obstacle found");
-        }
-
-        if (_targetPosition == null)
-        {
-            Debug.Log("Goal is null");
-        }
     }
 
     private void Update()
@@ -60,7 +51,7 @@ public class MoveToGoalAgent : Agent
     public override void OnEpisodeBegin()
     {
         _animator.SetTrigger(Restart);
-        transform.position = new Vector3(UnityEngine.Random.Range(-5,6), 0.7f, UnityEngine.Random.Range(-18,-21));
+        transform.position = new Vector3(UnityEngine.Random.Range(-5,6), 0.6f, -20f);
         _agentState = GameState.Play;
     }
 
@@ -105,7 +96,7 @@ public class MoveToGoalAgent : Agent
             case 2: addForce.z = 1f; break;
         }
         
-        if(_agentState == GameState.Play && _gameManager.GetCurrentState() == GameState.Play)
+        if(_agentState == GameState.Play)// && _gameManager.GetCurrentState() == GameState.Play)
             HandleMovement(addForce);
 
         AddReward(-1f / MaxStep);
@@ -161,7 +152,7 @@ public class MoveToGoalAgent : Agent
         {
             SetReward(+1f);
             EndEpisode();
-          // _gameManager.AIVictory();
+            //_gameManager.AIVictory();
         }
     }
 
