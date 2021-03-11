@@ -7,7 +7,8 @@ using UnityEngine;
 public class MoveToGoalAgent : Agent
 {
     private GameState _agentState;
-    
+
+    private GameObject _rotator;
     private GameObject _targetPosition;
     private GameObject[] _obstacles;
 
@@ -33,6 +34,7 @@ public class MoveToGoalAgent : Agent
         _gameManager = FindObjectOfType<GameManager>();
         _obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
         _targetPosition = GameObject.FindWithTag("Finish");
+        _rotator = GameObject.Find("Rotator");
     }
 
     private void Start()
@@ -65,7 +67,12 @@ public class MoveToGoalAgent : Agent
     public override void CollectObservations(VectorSensor sensor)
     {
         sensor.AddObservation(transform.position);
+        
         var dirToFinish = (_targetPosition.transform.localPosition - transform.localPosition).normalized;
+        sensor.AddObservation(dirToFinish.x);
+        sensor.AddObservation(dirToFinish.z);
+
+        dirToFinish = (_rotator.transform.localPosition - transform.localPosition).normalized;
         sensor.AddObservation(dirToFinish.x);
         sensor.AddObservation(dirToFinish.z);
 
