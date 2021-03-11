@@ -17,11 +17,12 @@ public class InputManager : MonoBehaviour
     private float _turnSmoothVelocity;
     private static readonly int Run = Animator.StringToHash("run");
 
-    private Vector3 addForce;
+    [HideInInspector] public Vector3 addForce;
     private float _horizontal;
     private float _vertical;
 
     public bool isPlayer;
+    public float movePlayerSpeed;
 
     private void Awake()
     {
@@ -56,34 +57,61 @@ public class InputManager : MonoBehaviour
         if(isPlayer)
            GetInput();
 
+        //HandleJoystick();
         addForce.x = _horizontal;
         addForce.z = _vertical;
 
         _animator.SetBool(Run, addForce.magnitude >= 0.1f);
 
+        if (!(addForce.magnitude >= 0.1f))
+            addForce = RemoveForce();
+
         var targetAngle = Mathf.Atan2(addForce.x, addForce.z) * Mathf.Rad2Deg;
         var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, turnSmoothTime);
         transform.rotation = Quaternion.Euler(0f, angle, 0f);
-
+        
         _rb.velocity = addForce * speed + new Vector3(0, _rb.velocity.y, 0);
+        _rb.AddForce(Vector3.left * movePlayerSpeed);
     }
 
     private void GetInput()
     {
         if (_gameManager.IsKeyboard())
         {
-            _horizontal = Input.GetAxisRaw("Horizontal");
-            _vertical = Input.GetAxisRaw("Vertical");
+            HandleKeyInput();
         }
         else
         {
-            _horizontal = joystick.Horizontal;
-            _vertical = joystick.Vertical;
+            HandleJoystick();
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void HandleKeyInput()
     {
-        _rb.AddForce(Vector3.zero);
+        _horizontal = Input.GetAxisRaw("Horizontal");
+        _vertical = Input.GetAxisRaw("Vertical");
+    }
+
+    private void HandleJoystick()
+    {
+        _horizontal = joystick.Horizontal;
+
+        if (joystick.Vertical >= .2f)
+        {
+            _vertical = 1f;
+        }
+        else if (joystick.Vertical <= -.2f)
+        {
+            _vertical = -1f;
+        }
+        else
+        {
+            _vertical = 0;
+        }
+    }
+
+    private Vector3 RemoveForce()
+    {
+        return new Vector3(0f, 0f, 0f);
     }
 }

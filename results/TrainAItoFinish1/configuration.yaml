@@ -28,7 +28,7 @@ behaviors:
         learning_rate: 0.0003
         use_actions: false
         use_vail: false
-        demo_path: Demos/RunToFinishDone.demo
+        demo_path: Demo/AIRunsec.demo
     init_path: null
     keep_checkpoints: 5
     checkpoint_interval: 500000
@@ -38,7 +38,7 @@ behaviors:
     threaded: true
     self_play: null
     behavioral_cloning:
-      demo_path: Demos/RunToFinishDone.demo
+      demo_path: Demo/AIRunsec.demo
       steps: 0
       strength: 0.5
       samples_per_update: 0
@@ -60,7 +60,7 @@ engine_settings:
   no_graphics: false
 environment_parameters: null
 checkpoint_settings:
-  run_id: RunToGoalOpponent_imitation7
+  run_id: TrainAItoFinish1
   initialize_from: null
   load_model: false
   resume: false

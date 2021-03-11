@@ -55,7 +55,6 @@ public class RestartLevel : MonoBehaviour
     private void SetRigidBody()
     {
         _rb.velocity = new Vector3(0f, 0f, 0f);
-        _rb.constraints = RigidbodyConstraints.FreezePositionY;
         _rb.freezeRotation = true;
     }
     
@@ -69,5 +68,6 @@ public class RestartLevel : MonoBehaviour
     {
         transform.position = _respawnPlayer;
         transform.rotation = Quaternion.identity;
+        _inputManager.movePlayerSpeed = 0f;
     }
 }

@@ -1,0 +1,63 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1615469602",
+        "python_version": "3.7.9 (v3.7.9:13c94747c7, Aug 15 2020, 01:31:08) \n[Clang 6.0 (clang-600.0.57)]",
+        "command_line_arguments": "/Users/celikberkaltingok/Documents/GitHub/PanteonRemoteDemo/venv/bin/mlagents-learn config/moveToGoal.yaml --run-id=TrainAItoFinish2",
+        "mlagents_version": "0.24.1",
+        "mlagents_envs_version": "0.24.1",
+        "communication_protocol_version": "1.4.0",
+        "pytorch_version": "1.7.1",
+        "numpy_version": "1.20.1",
+        "end_time_seconds": "1615469613"
+    },
+    "total": 10.655810067,
+    "count": 1,
+    "self": 0.010033097000002655,
+    "children": {
+        "run_training.setup": {
+            "total": 0.08277997599999987,
+            "count": 1,
+            "self": 0.08277997599999987
+        },
+        "TrainerController.start_learning": {
+            "total": 10.562996993999999,
+            "count": 1,
+            "self": 9.340099999910478e-05,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 10.560669678,
+                    "count": 1,
+                    "self": 10.560589030000001,
+                    "children": {
+                        "demo_to_buffer": {
+                            "total": 8.06479999990728e-05,
+                            "count": 1,
+                            "self": 1.608699999877672e-05,
+                            "children": {
+                                "load_demonstration": {
+                                    "total": 6.456100000029608e-05,
+                                    "count": 1,
+                                    "self": 6.456100000029608e-05
+                                }
+                            }
+                        }
+                    }
+                },
+                "TrainerController._save_models": {
+                    "total": 0.0022339149999996977,
+                    "count": 1,
+                    "self": 0.0002811329999996559,
+                    "children": {
+                        "RLTrainer._checkpoint": {
+                            "total": 0.0019527820000000418,
+                            "count": 1,
+                            "self": 0.0019527820000000418
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class CollisionDetect : MonoBehaviour
 {
@@ -42,9 +43,21 @@ public class CollisionDetect : MonoBehaviour
         {
             if (_inputManager.isPlayer)
                 _restartLevel.FinishSequence();
-            else
-                _gameManager.AIVictory();
         }
+    }
+    
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.GetComponent<PushPlayer>())
+            _inputManager.movePlayerSpeed = other.GetComponent<PushPlayer>().movePlayerSpeed;
+    }
+    
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<PushPlayer>())
+            _inputManager.movePlayerSpeed = 0f;
+        
+        _rb.AddForce(Vector3.zero);
     }
 
     private void FallSequence(Collider other)

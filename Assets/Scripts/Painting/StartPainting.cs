@@ -4,6 +4,7 @@ public class StartPainting : MonoBehaviour
 {
     private GameManager _gameManager;
     private UIManager _uiManager;
+    private Rigidbody _rb;
     
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Transform paintingPosition;
@@ -17,9 +18,10 @@ public class StartPainting : MonoBehaviour
         _move = false;
         _gameManager = FindObjectOfType<GameManager>();
         _uiManager = FindObjectOfType <UIManager>();
+        _rb = GetComponent<Rigidbody>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if(_move)
             GoToPaintingPos();
@@ -30,15 +32,16 @@ public class StartPainting : MonoBehaviour
         _move = true;
         SetCamera();
         _uiManager.IsActiveWallPercent(true);
+        _uiManager.PaintingJoystick();
         _gameManager.IsActivePainting(true);
     }
     
+    [ContextMenu("Go to painting pos")]
     private void GoToPaintingPos()
     {
-        transform.position =
-            Vector3.MoveTowards(transform.position, paintingPosition.position, _speed * Time.deltaTime);
-
-        if (transform.position == paintingPosition.position)
+        _rb.MovePosition(Vector3.Lerp(transform.position, paintingPosition.position, Time.deltaTime * _speed));
+        
+        if (paintingPosition.position.x == transform.position.x)
             _move = false;
     }
 

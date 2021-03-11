@@ -40,17 +40,23 @@ public class MoveToGoalAgent : Agent
         _rb.isKinematic = true;
     }
 
+    private void FixedUpdate()
+    {
+        if(_gameManager.GetCurrentState() == GameState.Finish)
+            Destroy(gameObject);
+    }
+
     public override void OnEpisodeBegin()
     {
         _animator.SetTrigger(Restart);
-        transform.position = new Vector3(UnityEngine.Random.Range(-5f,5f), 0.5f, -17.45f);
+        transform.position = new Vector3(UnityEngine.Random.Range(-5f,5f), 0.7f, -17.45f);
         agentState = GameState.Play;
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
         sensor.AddObservation(transform.position);
-        Vector3 dirToFinish = (targetPosition.localPosition - transform.localPosition).normalized;
+        var dirToFinish = (targetPosition.localPosition - transform.localPosition).normalized;
         sensor.AddObservation(dirToFinish.x);
         sensor.AddObservation(dirToFinish.z);
 
@@ -71,7 +77,7 @@ public class MoveToGoalAgent : Agent
 
     public override void OnActionReceived(float[] vectorAction)
     {
-        Vector3 addForce = Vector3.zero;
+        var addForce = Vector3.zero;
         _horizontal = vectorAction[0];  // 0 = Don't Move; 1 = Left; 2 = Right
         _vertical = vectorAction[1];    // 0 = Don't Move; 1 = Back; 2 = Forward
         _speed = 5f;
@@ -90,7 +96,7 @@ public class MoveToGoalAgent : Agent
             case 2: addForce.z = 1f; break;
         }
         
-        if(agentState == GameState.Play && _gameManager.GetCurrentState() == GameState.Play)
+        if(agentState == GameState.Play)// && _gameManager.GetCurrentState() == GameState.Play)
             HandleMovement(addForce);
 
         AddReward(-1f / MaxStep);

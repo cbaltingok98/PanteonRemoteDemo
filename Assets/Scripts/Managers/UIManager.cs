@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject inGameUI;
     [SerializeField] private GameObject wallFillPercentTxt;
     [SerializeField] private Text currentRank;
+    [SerializeField] private GameObject joystick;
     private void Start()
     {
         StartLevel();
@@ -46,5 +47,11 @@ public class UIManager : MonoBehaviour
     public void UpdateRankText(string rank)
     {
         currentRank.text = "#" + rank;
+    }
+
+    public void PaintingJoystick()
+    {
+        joystick.GetComponent<Image>().enabled = false;
+        //joystick.GetComponentInChildren<Transform>().localScale = 
     }
 }
