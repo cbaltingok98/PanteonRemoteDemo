@@ -909,7 +909,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: f4541f8e8b77f4a769e68cc1fe454251, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: RunToFinish
@@ -962,7 +962,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Record: 0
   NumStepsToRecord: 0
-  DemonstrationName: AIRunDone
+  DemonstrationName: AIRunLast
   DemonstrationDirectory: Demos
 --- !u!1 &7851692471252073607
 GameObject:
