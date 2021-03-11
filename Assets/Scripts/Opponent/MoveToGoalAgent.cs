@@ -38,6 +38,15 @@ public class MoveToGoalAgent : Agent
     private void Start()
     {
         _rb.isKinematic = true;
+        if (_obstacles == null)
+        {
+            Debug.Log("NO obstacle found");
+        }
+
+        if (_targetPosition == null)
+        {
+            Debug.Log("Goal is null");
+        }
     }
 
     private void Update()
@@ -49,16 +58,16 @@ public class MoveToGoalAgent : Agent
     public override void OnEpisodeBegin()
     {
         _animator.SetTrigger(Restart);
-        transform.position = new Vector3(UnityEngine.Random.Range(-5f,5f), 0.7f, -17.45f);
+        transform.position = new Vector3(UnityEngine.Random.Range(-5,6), 0.7f, UnityEngine.Random.Range(-18,-21));
         _agentState = GameState.Play;
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
         sensor.AddObservation(transform.position);
-        //var dirToFinish = (_targetPosition.transform.localPosition - transform.localPosition).normalized;
-        //sensor.AddObservation(dirToFinish.x);
-        //sensor.AddObservation(dirToFinish.z);
+        var dirToFinish = (_targetPosition.transform.localPosition - transform.localPosition).normalized;
+        sensor.AddObservation(dirToFinish.x);
+        sensor.AddObservation(dirToFinish.z);
 
         foreach (var obstacle in _obstacles)
         {

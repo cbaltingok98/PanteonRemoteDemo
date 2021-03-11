@@ -5,12 +5,15 @@ public class StartPainting : MonoBehaviour
     private GameManager _gameManager;
     private UIManager _uiManager;
     private Rigidbody _rb;
+    private Animator _animator;
     
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Transform paintingPosition;
     
     private float _speed;
     private bool _move;
+    
+    private static readonly int Dance = Animator.StringToHash("dance");
 
     private void Awake()
     {
@@ -19,6 +22,7 @@ public class StartPainting : MonoBehaviour
         _gameManager = FindObjectOfType<GameManager>();
         _uiManager = FindObjectOfType <UIManager>();
         _rb = GetComponent<Rigidbody>();
+        _animator = GetComponentInChildren<Animator>();
     }
 
     private void FixedUpdate()
@@ -31,6 +35,7 @@ public class StartPainting : MonoBehaviour
     {
         _move = true;
         SetCamera();
+        _animator.SetTrigger(Dance);
         _uiManager.IsActiveWallPercent(true);
         _uiManager.PaintingJoystick();
         _gameManager.IsActivePainting(true);

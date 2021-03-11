@@ -24,7 +24,7 @@ public class PaintWall : MonoBehaviour
     public void UpdatePercentage()
     {
         _paintedPercentage += _addValue;
-        _uiManager.WallPercentUpdate(_paintedPercentage.ToString("0.0") + " %");
+        _uiManager.WallPercentUpdate(_paintedPercentage.ToString("0") + " %");
         CheckForFinish();
     }
 

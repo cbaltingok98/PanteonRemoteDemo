@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject painter;
     [SerializeField] private GameObject paintWall;
     
-    private bool _useKeyboard;
+    [SerializeField] private bool _useKeyboard;
 
     private void Awake()
     {
