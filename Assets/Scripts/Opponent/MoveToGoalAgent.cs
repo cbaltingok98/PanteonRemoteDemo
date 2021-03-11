@@ -105,7 +105,7 @@ public class MoveToGoalAgent : Agent
             case 2: addForce.z = 1f; break;
         }
         
-        if(_agentState == GameState.Play)// && _gameManager.GetCurrentState() == GameState.Play)
+        if(_agentState == GameState.Play && _gameManager.GetCurrentState() == GameState.Play)
             HandleMovement(addForce);
 
         AddReward(-1f / MaxStep);

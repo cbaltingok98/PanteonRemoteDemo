@@ -4,18 +4,24 @@ using UnityEngine;
 
 public class RankingManager : MonoBehaviour
 {
-    private MoveToGoalAgent[] opponents;
-    private Transform player;
+    private MoveToGoalAgent[] _opponents;
+    private Transform _player;
 
     private UIManager _uiManager;
     private GameManager _gameManager;
-    private int currentRank;
+
+    private bool _loadOpponent;
+    private int _currentRank;
     private void Awake()
     {
-        opponents = FindObjectsOfType<MoveToGoalAgent>();
-        player = FindObjectOfType<InputManager>().GetComponent<Transform>();
         _uiManager = FindObjectOfType<UIManager>();
         _gameManager = FindObjectOfType<GameManager>();
+    }
+
+    private void Start()
+    {
+        _opponents = FindObjectsOfType<MoveToGoalAgent>();
+        _player = FindObjectOfType<InputManager>().GetComponent<Transform>();
     }
 
     private void FixedUpdate()
@@ -26,16 +32,16 @@ public class RankingManager : MonoBehaviour
 
     private void CheckRank()
     {
-        currentRank = 1;
-        foreach (var opponent in opponents)
+        _currentRank = 1;
+        foreach (var opponent in _opponents)
         {
-            currentRank += opponent.transform.position.z > player.position.z ? 1 : 0;
+            _currentRank += opponent.transform.position.z > _player.position.z ? 1 : 0;
         }
         UpdateUI();
     }
 
     private void UpdateUI()
     {
-        _uiManager.UpdateRankText(currentRank.ToString());
+        _uiManager.UpdateRankText(_currentRank.ToString());
     }
 }
