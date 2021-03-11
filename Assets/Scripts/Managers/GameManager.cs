@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject paintWall;
     
     [SerializeField] private bool _useKeyboard;
-
+    private int _coin;
     private void Awake()
     {
         _gameState = GameState.Pause;
@@ -22,10 +22,16 @@ public class GameManager : MonoBehaviour
         
         painter.SetActive(false);
         paintWall.SetActive(false);
+
+        if (!PlayerPrefs.HasKey("coin"))
+            PlayerPrefs.SetInt("coin", 0);
+        
     }
 
     private void Start()
     {
+        _coin = PlayerPrefs.GetInt("coin");
+        
 #if UNITY_EDITOR
         _useKeyboard = true;
 #else
@@ -81,5 +87,11 @@ public class GameManager : MonoBehaviour
     public void ChangeStatePlay()
     {
         _gameState = GameState.Play;
+    }
+
+    public void UpdateCoin(int set)
+    {
+        PlayerPrefs.SetInt("coin", PlayerPrefs.GetInt("coin") + set);
+        _uiManager.UpdateCoinText(PlayerPrefs.GetInt("coin"));
     }
 }

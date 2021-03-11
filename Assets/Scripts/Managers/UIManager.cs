@@ -11,9 +11,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject aiVictory;
     [SerializeField] private Text currentRank;
     [SerializeField] private Text finishRank;
+    [SerializeField] private Text coin;
     private void Start()
     {
         StartLevel();
+        if (PlayerPrefs.HasKey("coin"))
+            coin.text = PlayerPrefs.GetInt("coin").ToString();
     }
 
     private void StartLevel()
@@ -35,7 +38,8 @@ public class UIManager : MonoBehaviour
     {
         EndLevel(false);
     }
-    
+
+
     private void IsActiveInGameUI(bool set)
     {
         inGameUI.SetActive(set);
@@ -64,6 +68,11 @@ public class UIManager : MonoBehaviour
     private void GetFinishRank()
     {
         finishRank.text = "Rank #" + currentRank.text;
+    }
+
+    public void UpdateCoinText(int set)
+    {
+        coin.text = set.ToString();
     }
 
     public void PaintingJoystick()

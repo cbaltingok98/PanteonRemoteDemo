@@ -7,7 +7,6 @@ public class CollisionDetect : MonoBehaviour
     private Rigidbody _rb;
     private InputManager _inputManager;
     private RestartLevel _restartLevel;
-    private GameManager _gameManager;
 
     private static readonly int Fall = Animator.StringToHash("fall");
     private static readonly int Die = Animator.StringToHash("die");
@@ -19,7 +18,6 @@ public class CollisionDetect : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _inputManager = GetComponent<InputManager>();
         _restartLevel = GetComponent<RestartLevel>();
-        _gameManager = FindObjectOfType<GameManager>();
     }
 
     private void OnCollisionEnter(Collision other)

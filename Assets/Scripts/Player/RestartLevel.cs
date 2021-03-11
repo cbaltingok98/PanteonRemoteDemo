@@ -11,6 +11,7 @@ public class RestartLevel : MonoBehaviour
     private Rigidbody _rb;
     private Animator _animator;
     private GameManager _gameManager;
+    private UIManager _uiManager;
     
     private static readonly int Run = Animator.StringToHash("run");
     private static readonly int Restart = Animator.StringToHash("restart");
@@ -22,6 +23,7 @@ public class RestartLevel : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _animator = GetComponentInChildren<Animator>();
         _gameManager = FindObjectOfType<GameManager>();
+        _uiManager = FindObjectOfType<UIManager>();
     }
 
     private void Start()

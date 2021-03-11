@@ -6,6 +6,7 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     [HideInInspector] public GameState playerState;
+    [HideInInspector] public Vector3 addForce;
     
     private Animator _animator;
     private GameManager _gameManager;
@@ -14,15 +15,14 @@ public class InputManager : MonoBehaviour
 
     public float speed = 6f;
     public float turnSmoothTime = 0.1f;
+    public float movePlayerSpeed;
+    
     private float _turnSmoothVelocity;
-    private static readonly int Run = Animator.StringToHash("run");
-
-    [HideInInspector] public Vector3 addForce;
     private float _horizontal;
     private float _vertical;
-
-    public float movePlayerSpeed;
-
+    
+    private static readonly int Run = Animator.StringToHash("run");
+    
     private void Awake()
     {
         playerState = GameState.Pause;
