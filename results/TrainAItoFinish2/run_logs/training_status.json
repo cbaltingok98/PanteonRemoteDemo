@@ -2,17 +2,17 @@
     "RunToFinish": {
         "checkpoints": [
             {
-                "steps": 0,
-                "file_path": "results/TrainAItoFinish2/RunToFinish/RunToFinish-0.onnx",
+                "steps": 95092,
+                "file_path": "results/TrainAItoFinish2/RunToFinish/RunToFinish-95092.onnx",
                 "reward": null,
-                "creation_time": 1615469613.526011
+                "creation_time": 1615474752.9515789
             }
         ],
         "final_checkpoint": {
-            "steps": 0,
+            "steps": 95092,
             "file_path": "results/TrainAItoFinish2/RunToFinish.onnx",
             "reward": null,
-            "creation_time": 1615469613.526011
+            "creation_time": 1615474752.9515789
         }
     },
     "metadata": {

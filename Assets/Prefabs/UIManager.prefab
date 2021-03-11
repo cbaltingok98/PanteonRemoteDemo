@@ -43,3 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb2615a09da1a4027b75c99c164721b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menu: {fileID: 0}
+  inGameUI: {fileID: 0}
+  wallFillPercentTxt: {fileID: 0}
+  joystick: {fileID: 0}
+  playerVictory: {fileID: 0}
+  aiVictory: {fileID: 0}
+  currentRank: {fileID: 0}

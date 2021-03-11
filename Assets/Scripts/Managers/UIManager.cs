@@ -6,22 +6,34 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject menu;
     [SerializeField] private GameObject inGameUI;
     [SerializeField] private GameObject wallFillPercentTxt;
-    [SerializeField] private Text currentRank;
     [SerializeField] private GameObject joystick;
+    [SerializeField] private GameObject playerVictory;
+    [SerializeField] private GameObject aiVictory;
+    [SerializeField] private Text currentRank;
+    [SerializeField] private Text finishRank;
     private void Start()
     {
         StartLevel();
     }
 
-    public void StartLevel()
+    private void StartLevel()
     {
         IsActiveInGameUI(true);
         IsActiveMenuUI(false);
     }
-    public void EndLevel()
+    public void EndLevel(bool isPlayer)
     {
         IsActiveInGameUI(false);
         IsActiveMenuUI(true);
+        
+        GetFinishRank();
+        playerVictory.SetActive(isPlayer);
+        aiVictory.SetActive(!isPlayer);
+    }
+
+    public void AIVictory()
+    {
+        EndLevel(false);
     }
     
     private void IsActiveInGameUI(bool set)
@@ -46,12 +58,16 @@ public class UIManager : MonoBehaviour
 
     public void UpdateRankText(string rank)
     {
-        currentRank.text = "#" + rank;
+        currentRank.text = rank;
+    }
+
+    private void GetFinishRank()
+    {
+        finishRank.text = "Rank #" + currentRank.text;
     }
 
     public void PaintingJoystick()
     {
         joystick.GetComponent<Image>().enabled = false;
-        //joystick.GetComponentInChildren<Transform>().localScale = 
     }
 }

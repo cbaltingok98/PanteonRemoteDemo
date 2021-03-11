@@ -40,9 +40,9 @@ public class MoveToGoalAgent : Agent
         _rb.isKinematic = true;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        if(_gameManager.GetCurrentState() == GameState.Finish)
+        if(_gameManager.GetCurrentState() == GameState.Finish || _gameManager.GetCurrentState() == GameState.Paint)
             Destroy(gameObject);
     }
 
@@ -96,7 +96,7 @@ public class MoveToGoalAgent : Agent
             case 2: addForce.z = 1f; break;
         }
         
-        if(agentState == GameState.Play)// && _gameManager.GetCurrentState() == GameState.Play)
+        if(agentState == GameState.Play && _gameManager.GetCurrentState() == GameState.Play)
             HandleMovement(addForce);
 
         AddReward(-1f / MaxStep);
@@ -136,7 +136,7 @@ public class MoveToGoalAgent : Agent
     {
         if (other.transform.CompareTag("Obstacle"))
         {
-            SetReward(-1f);
+            SetReward(-0.5f);
             StartCoroutine(LateRestart());
         }
     }
@@ -150,16 +150,9 @@ public class MoveToGoalAgent : Agent
         }
         else if (other.transform.CompareTag("Finish"))
         {
-            SetReward(+1f);
-            EndEpisode();
-        }
-        else if (other.transform.CompareTag("reward"))
-        {
-            SetReward(+0.5f);
-        }
-        else if (other.transform.CompareTag("Mover"))
-        {
-            SetReward(+0.5f);
+           // SetReward(+1f);
+           // EndEpisode();
+           _gameManager.AIVictory();
         }
     }
 
@@ -168,6 +161,10 @@ public class MoveToGoalAgent : Agent
         if (other.transform.CompareTag("Mover"))
         {
             _movePlayerSpeed = other.GetComponent<PushPlayer>().movePlayerSpeed;
+        }
+        else if (other.GetComponent<Reward>())
+        {
+            SetReward(other.GetComponent<Reward>().GetReward());
         }
     }
 

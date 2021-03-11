@@ -41,8 +41,7 @@ public class CollisionDetect : MonoBehaviour
         }
         else if (other.transform.CompareTag("Finish"))
         {
-            if (_inputManager.isPlayer)
-                _restartLevel.FinishSequence();
+            _restartLevel.FinishSequence();
         }
     }
     

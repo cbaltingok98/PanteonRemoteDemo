@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
     public void AIVictory()
     {
         _gameState = GameState.Finish;
-
+        _uiManager.EndLevel(false);
     }
 
     public void EndLevel()
@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
     {
         winParticle.Play();
         yield return new WaitForSeconds(2f);
-        _uiManager.EndLevel();
+        _uiManager.EndLevel(true);
     }
 
     public void PlayAgainBtn()

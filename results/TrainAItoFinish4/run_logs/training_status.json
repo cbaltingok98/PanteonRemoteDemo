@@ -1,0 +1,29 @@
+{
+    "RunToFinish": {
+        "checkpoints": [
+            {
+                "steps": 499949,
+                "file_path": "results/TrainAItoFinish4/RunToFinish/RunToFinish-499949.onnx",
+                "reward": -1.102380886407835,
+                "creation_time": 1615477393.220598
+            },
+            {
+                "steps": 500390,
+                "file_path": "results/TrainAItoFinish4/RunToFinish/RunToFinish-500390.onnx",
+                "reward": -0.6280740070053272,
+                "creation_time": 1615477393.3274171
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 500390,
+            "file_path": "results/TrainAItoFinish4/RunToFinish.onnx",
+            "reward": -0.6280740070053272,
+            "creation_time": 1615477393.3274171
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.2.0",
+        "mlagents_version": "0.24.1",
+        "torch_version": "1.7.1"
+    }
+}
