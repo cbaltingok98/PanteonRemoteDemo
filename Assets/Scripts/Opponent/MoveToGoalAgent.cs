@@ -31,13 +31,13 @@ public class MoveToGoalAgent : Agent
         _rb = GetComponent<Rigidbody>();
         _animator = GetComponentInChildren<Animator>();
         _gameManager = FindObjectOfType<GameManager>();
+        _obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
+        _targetPosition = GameObject.FindWithTag("Finish");
     }
 
     private void Start()
     {
         _rb.isKinematic = true;
-        _obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
-        _targetPosition = GameObject.FindWithTag("Finish");
     }
 
     private void Update()
@@ -56,9 +56,9 @@ public class MoveToGoalAgent : Agent
     public override void CollectObservations(VectorSensor sensor)
     {
         sensor.AddObservation(transform.position);
-        var dirToFinish = (_targetPosition.transform.localPosition - transform.localPosition).normalized;
-        sensor.AddObservation(dirToFinish.x);
-        sensor.AddObservation(dirToFinish.z);
+        //var dirToFinish = (_targetPosition.transform.localPosition - transform.localPosition).normalized;
+        //sensor.AddObservation(dirToFinish.x);
+        //sensor.AddObservation(dirToFinish.z);
 
         foreach (var obstacle in _obstacles)
         {
