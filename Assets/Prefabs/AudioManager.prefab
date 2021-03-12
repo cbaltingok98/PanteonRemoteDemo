@@ -46,18 +46,30 @@ MonoBehaviour:
   sounds:
   - name: GameTheme
     clip: {fileID: 8300000, guid: c832a9656adf0483abc12353e28da471, type: 3}
-    volume: 1
+    volume: 0.5
     pitch: 1
     loop: 1
     source: {fileID: 0}
-  - name: PlayerMove
-    clip: {fileID: 0}
+  - name: GameOver
+    clip: {fileID: 8300000, guid: 23e3c7eb96fb34a53bc195fb327023df, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Coin
+    clip: {fileID: 8300000, guid: 1d6a0db0192244b8aad5eebd6538a7af, type: 3}
+    volume: 0.3
+    pitch: 1.1
+    loop: 0
+    source: {fileID: 0}
+  - name: Victory
+    clip: {fileID: 8300000, guid: 534d167e4f052414aad6db82f3e631e7, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Death
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 81510e46c598f4dfda2d75bec435ec3c, type: 3}
     volume: 1
     pitch: 1
     loop: 0

@@ -43,5 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e555dcdefffc411f8d16e3608c9a5103, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  winParticle: {fileID: 0}
   painter: {fileID: 0}
   paintWall: {fileID: 0}
+  _useKeyboard: 0

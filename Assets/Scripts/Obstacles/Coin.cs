@@ -3,16 +3,14 @@
 public class Coin : MonoBehaviour
 {
     private GameManager _gameManager;
-    private AudioManager _audioManager;
 
     private ParticleSystem explodeParticle;
     
-    private int value = 1;
+    [SerializeField] private int value = 1;
 
     private void Awake()
     {
         _gameManager = FindObjectOfType<GameManager>();
-        _audioManager = AudioManager.instance;
         explodeParticle = GetComponentInChildren<ParticleSystem>();
     }
 
@@ -21,7 +19,6 @@ public class Coin : MonoBehaviour
         if (other.name == "Player")
         {
             _gameManager.UpdateCoin(value);
-            _audioManager.Play("Coin");
         }
 
         explodeParticle.transform.parent = null;

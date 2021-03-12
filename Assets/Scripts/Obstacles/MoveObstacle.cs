@@ -3,13 +3,13 @@
 [DisallowMultipleComponent]
 public class MoveObstacle : MonoBehaviour
 {
-    [SerializeField] bool move = true;
-    [SerializeField] Vector3 movementVector;
-    [SerializeField] float period = 3f;
+    [SerializeField] private bool move = true;
+    [SerializeField] private Vector3 movementVector;
+    [SerializeField] private float period = 3f;
 
-    [SerializeField] float movementFactor; // 0 for not moved, 1 for fully moved
+    [SerializeField] private float movementFactor; // 0 for not moved, 1 for fully moved
 
-    Vector3 _startingPos;
+    private Vector3 _startingPos;
 
     private void Start()
     {

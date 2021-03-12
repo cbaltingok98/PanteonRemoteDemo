@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Media;
 using Enums;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -45,7 +44,7 @@ public class GameManager : MonoBehaviour
     {
         return _useKeyboard;
     }
-
+    
     private void PlayGameTheme()
     {
         _audioManager.SetVolume("GameTheme", 0.5f);
@@ -69,6 +68,11 @@ public class GameManager : MonoBehaviour
         _audioManager.Play("Death");
     }
 
+    private void CoinSound()
+    {
+        _audioManager.Play("Coin");
+    }
+   
     public GameState GetCurrentState()
     {
         return _gameState;
@@ -120,5 +124,6 @@ public class GameManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("coin", PlayerPrefs.GetInt("coin") + set);
         _uiManager.UpdateCoinText(PlayerPrefs.GetInt("coin"));
+        CoinSound();
     }
 }

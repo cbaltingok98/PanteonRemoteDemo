@@ -50,6 +50,7 @@ MonoBehaviour:
   playerVictory: {fileID: 0}
   aiVictory: {fileID: 0}
   tutorial: {fileID: 0}
+  paintTutorial: {fileID: 0}
   currentRank: {fileID: 0}
   finishRank: {fileID: 0}
   coin: {fileID: 0}

@@ -20,7 +20,6 @@ public class RankingManager : MonoBehaviour
     private void Start()
     {
         load = true;
-        
     }
 
     private void FixedUpdate()

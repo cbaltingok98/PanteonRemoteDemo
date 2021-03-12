@@ -42,6 +42,7 @@ public class RestartLevel : MonoBehaviour
         SetPosition();
         SetRigidBody();
         SetAnimation();
+        _uiManager.SetTutorialUI(true);
         _inputManager.playerState = GameState.Pause;
     }
     
