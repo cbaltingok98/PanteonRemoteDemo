@@ -1,34 +1,40 @@
-﻿using System;
-using Enums;
+﻿using Enums;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    [SerializeField] CharacterController controller;
     [HideInInspector] public GameState playerState;
+    [HideInInspector] public Vector3 addForce;
     
     private Animator _animator;
     private GameManager _gameManager;
     private Rigidbody _rb;
+    private UIManager _uiManager;
     public Joystick joystick;
-
+    
     public float speed = 6f;
     public float turnSmoothTime = 0.1f;
+    public float movePlayerSpeed;
+    
     private float _turnSmoothVelocity;
-    private static readonly int Run = Animator.StringToHash("run");
-
     private float _horizontal;
     private float _vertical;
-
-    public bool isPlayer;
-
+    
+    private static readonly int Run = Animator.StringToHash("run");
+    
     private void Awake()
     {
         playerState = GameState.Pause;
-        controller.detectCollisions = false;
         _rb = GetComponent<Rigidbody>();
         _gameManager = FindObjectOfType<GameManager>();
         _animator = GetComponentInChildren<Animator>();
+        _uiManager = FindObjectOfType<UIManager>();
+    }
+
+    private void Start()
+    {
+        addForce = Vector3.zero;
+        _rb.isKinematic = true;
     }
 
     private void Update()
@@ -40,39 +46,69 @@ public class InputManager : MonoBehaviour
         {
             _gameManager.SetGameState(GameState.Play);
             playerState = GameState.Play;
+            _rb.isKinematic = false;
+            _uiManager.SetTutorialUI(false);
         }
-        
     }
 
     private void MoveCharacter()
     {
-        if(isPlayer)
-            GetInput();
+        GetInput();
+        //HandleJoystick();
+        addForce.x = _horizontal;
+        addForce.z = _vertical;
 
-        var direction = new Vector3(_horizontal, 0f, _vertical).normalized;
-        
-        _animator.SetBool(Run, direction.magnitude >= 0.1f);
-        if (!(direction.magnitude >= 0.1f)) return;
+        _animator.SetBool(Run, addForce.magnitude >= 0.1f);
 
-        var targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+        if (!(addForce.magnitude >= 0.1f))
+            addForce = RemoveForce();
+
+        var targetAngle = Mathf.Atan2(addForce.x, addForce.z) * Mathf.Rad2Deg;
         var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, turnSmoothTime);
         transform.rotation = Quaternion.Euler(0f, angle, 0f);
-
-        controller.Move(direction * (speed * Time.deltaTime));
-        //_rb.AddForce(direction * (speed * Time.deltaTime));
+        
+        _rb.velocity = addForce * speed + new Vector3(0, _rb.velocity.y, 0);
+        _rb.AddForce(Vector3.left * movePlayerSpeed);
     }
 
     private void GetInput()
     {
         if (_gameManager.IsKeyboard())
         {
-            _horizontal = Input.GetAxisRaw("Horizontal");
-            _vertical = Input.GetAxisRaw("Vertical");
+            HandleKeyInput();
         }
         else
         {
-            _horizontal = joystick.Horizontal;
-            _vertical = joystick.Vertical;
+            HandleJoystick();
         }
+    }
+
+    private void HandleKeyInput()
+    {
+        _horizontal = Input.GetAxisRaw("Horizontal");
+        _vertical = Input.GetAxisRaw("Vertical");
+    }
+
+    private void HandleJoystick()
+    {
+        _horizontal = joystick.Horizontal;
+
+        if (joystick.Vertical >= .2f)
+        {
+            _vertical = 1f;
+        }
+        else if (joystick.Vertical <= -.2f)
+        {
+            _vertical = -1f;
+        }
+        else
+        {
+            _vertical = 0;
+        }
+    }
+
+    private Vector3 RemoveForce()
+    {
+        return new Vector3(0f, 0f, 0f);
     }
 }

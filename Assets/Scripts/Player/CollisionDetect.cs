@@ -7,7 +7,8 @@ public class CollisionDetect : MonoBehaviour
     private InputManager _inputManager;
     private RestartLevel _restartLevel;
     private GameManager _gameManager;
-
+    private ParticleManager _particleManager;
+    
     private static readonly int Fall = Animator.StringToHash("fall");
     private static readonly int Die = Animator.StringToHash("die");
 
@@ -19,14 +20,21 @@ public class CollisionDetect : MonoBehaviour
         _inputManager = GetComponent<InputManager>();
         _restartLevel = GetComponent<RestartLevel>();
         _gameManager = FindObjectOfType<GameManager>();
+        _particleManager = GetComponent<ParticleManager>();
     }
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.transform.CompareTag("Obstacle"))
+        if (other.transform.CompareTag("Opponent"))
+        {
+            _particleManager.PlayCollisionParticle();
+        }
+        else if (other.transform.CompareTag("Obstacle"))
         {
             Debug.Log("Obstacle");
+            _particleManager.PlayDeathParticle();
             _animator.SetTrigger(Die);
+            _gameManager.DeathSound();
             _restartLevel.StartCoroutine(nameof(RestartLevel.StartLateRestart));
         }
     }
@@ -40,18 +48,28 @@ public class CollisionDetect : MonoBehaviour
         }
         else if (other.transform.CompareTag("Finish"))
         {
-            if (_inputManager.isPlayer)
-                _restartLevel.FinishSequence();
-            else
-                _gameManager.AIVictory();
+            _restartLevel.FinishSequence();
         }
+    }
+    
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.GetComponent<PushPlayer>())
+            _inputManager.movePlayerSpeed = other.GetComponent<PushPlayer>().movePlayerSpeed;
+    }
+    
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<PushPlayer>())
+            _inputManager.movePlayerSpeed = 0f;
+        
+        _rb.AddForce(Vector3.zero);
     }
 
     private void FallSequence(Collider other)
     {
         _animator.SetTrigger(Fall);
         var fallSide = other.transform.name == "FallLeft" ? -5f : 5f;
-        _rb.useGravity = true;
         _rb.constraints = RigidbodyConstraints.None;
         _rb.velocity = new Vector3(fallSide, 5f, 0f);
     }

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PaintWall : MonoBehaviour
 {
@@ -24,7 +23,7 @@ public class PaintWall : MonoBehaviour
     public void UpdatePercentage()
     {
         _paintedPercentage += _addValue;
-        _uiManager.WallPercentUpdate(_paintedPercentage.ToString("0.00") + " %");
+        _uiManager.WallPercentUpdate(_paintedPercentage.ToString("0") + " %");
         CheckForFinish();
     }
 

@@ -1,0 +1,89 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1615493796",
+        "python_version": "3.7.9 (v3.7.9:13c94747c7, Aug 15 2020, 01:31:08) \n[Clang 6.0 (clang-600.0.57)]",
+        "command_line_arguments": "/Users/celikberkaltingok/Documents/GitHub/PanteonRemoteDemo/venv/bin/mlagents-learn config/moveToGoal.yaml --run-id=TrainAItoFinish6",
+        "mlagents_version": "0.24.1",
+        "mlagents_envs_version": "0.24.1",
+        "communication_protocol_version": "1.4.0",
+        "pytorch_version": "1.7.1",
+        "numpy_version": "1.20.1",
+        "end_time_seconds": "1615493835"
+    },
+    "total": 38.543002345,
+    "count": 1,
+    "self": 0.008686199999999644,
+    "children": {
+        "run_training.setup": {
+            "total": 0.1021288090000001,
+            "count": 1,
+            "self": 0.1021288090000001
+        },
+        "TrainerController.start_learning": {
+            "total": 38.432187336,
+            "count": 1,
+            "self": 9.938899999895057e-05,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 38.42785911,
+                    "count": 1,
+                    "self": 37.902657086,
+                    "children": {
+                        "demo_to_buffer": {
+                            "total": 0.5252020240000022,
+                            "count": 1,
+                            "self": 9.81510000030994e-05,
+                            "children": {
+                                "load_demonstration": {
+                                    "total": 0.006820327999996323,
+                                    "count": 1,
+                                    "self": 0.006040717999994172,
+                                    "children": {
+                                        "read_file": {
+                                            "total": 0.0007796100000021511,
+                                            "count": 1,
+                                            "self": 0.0007796100000021511
+                                        }
+                                    }
+                                },
+                                "make_demo_buffer": {
+                                    "total": 0.5182835450000027,
+                                    "count": 1,
+                                    "self": 0.10360756299995444,
+                                    "children": {
+                                        "steps_from_proto": {
+                                            "total": 0.4146759820000483,
+                                            "count": 2688,
+                                            "self": 0.2948383120003797,
+                                            "children": {
+                                                "_process_vector_observation": {
+                                                    "total": 0.1198376699996686,
+                                                    "count": 5376,
+                                                    "self": 0.1198376699996686
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "TrainerController._save_models": {
+                    "total": 0.00422883699999943,
+                    "count": 1,
+                    "self": 0.0003148709999933885,
+                    "children": {
+                        "RLTrainer._checkpoint": {
+                            "total": 0.003913966000006042,
+                            "count": 1,
+                            "self": 0.003913966000006042
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

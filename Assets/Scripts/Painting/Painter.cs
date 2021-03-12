@@ -17,7 +17,7 @@ public class Painter : MonoBehaviour {
 
     private void HandlePaint()
     {
-        if (Input.touchCount > 0 || Input.GetMouseButtonDown(0))
+        if (Input.touchCount > 0 || Input.GetMouseButton(0))
         {
             Ray ray;
             if (_gameManager.IsKeyboard())

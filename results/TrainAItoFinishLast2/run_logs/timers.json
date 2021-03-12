@@ -1,0 +1,42 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1615550041",
+        "python_version": "3.7.9 (v3.7.9:13c94747c7, Aug 15 2020, 01:31:08) \n[Clang 6.0 (clang-600.0.57)]",
+        "command_line_arguments": "/Users/celikberkaltingok/Documents/GitHub/PanteonRemoteDemo/venv/bin/mlagents-learn config/moveToGoal.yaml --run-id=TrainAItoFinishLast2",
+        "mlagents_version": "0.24.1",
+        "mlagents_envs_version": "0.24.1",
+        "communication_protocol_version": "1.4.0",
+        "pytorch_version": "1.7.1",
+        "numpy_version": "1.20.1",
+        "end_time_seconds": "1615550102"
+    },
+    "total": 60.146640332,
+    "count": 1,
+    "self": 0.016523263999999926,
+    "children": {
+        "run_training.setup": {
+            "total": 0.0762060739999999,
+            "count": 1,
+            "self": 0.0762060739999999
+        },
+        "TrainerController.start_learning": {
+            "total": 60.053910994,
+            "count": 1,
+            "self": 0.0009933939999982044,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 60.050298474,
+                    "count": 1,
+                    "self": 60.050298474
+                },
+                "TrainerController._save_models": {
+                    "total": 0.002619125999999028,
+                    "count": 1,
+                    "self": 0.002619125999999028
+                }
+            }
+        }
+    }
+}

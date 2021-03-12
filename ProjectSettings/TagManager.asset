@@ -11,6 +11,9 @@ TagManager:
   - RestartLevel
   - Paintable
   - Painted
+  - reward
+  - FxTemporaire
+  - Opponent
   layers:
   - Default
   - TransparentFX
