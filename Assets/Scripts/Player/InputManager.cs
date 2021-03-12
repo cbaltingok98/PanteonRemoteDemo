@@ -9,8 +9,9 @@ public class InputManager : MonoBehaviour
     private Animator _animator;
     private GameManager _gameManager;
     private Rigidbody _rb;
+    private UIManager _uiManager;
     public Joystick joystick;
-
+    
     public float speed = 6f;
     public float turnSmoothTime = 0.1f;
     public float movePlayerSpeed;
@@ -27,6 +28,7 @@ public class InputManager : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _gameManager = FindObjectOfType<GameManager>();
         _animator = GetComponentInChildren<Animator>();
+        _uiManager = FindObjectOfType<UIManager>();
     }
 
     private void Start()
@@ -45,8 +47,8 @@ public class InputManager : MonoBehaviour
             _gameManager.SetGameState(GameState.Play);
             playerState = GameState.Play;
             _rb.isKinematic = false;
+            _uiManager.SetTutorialUI(false);
         }
-        
     }
 
     private void MoveCharacter()

@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2577666236102328531
 Transform:
@@ -49,4 +49,7 @@ MonoBehaviour:
   joystick: {fileID: 0}
   playerVictory: {fileID: 0}
   aiVictory: {fileID: 0}
+  tutorial: {fileID: 0}
   currentRank: {fileID: 0}
+  finishRank: {fileID: 0}
+  coin: {fileID: 0}

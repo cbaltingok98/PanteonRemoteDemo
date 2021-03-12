@@ -20,10 +20,10 @@ behaviors:
         strength: 1.0
       gail:
         strength: 0.5
-        demo_path: Demos/AIRunLast.demo
+        demo_path: Demos/AIRunLastDone.demo
     behavioral_cloning:
       strength: 0.5
-      demo_path: Demos/AIRunLast.demo
+      demo_path: Demos/AIRunLastDone.demo
     max_steps: 500000
     time_horizon: 64
     summary_freq: 10000

@@ -6,7 +6,9 @@ public class CollisionDetect : MonoBehaviour
     private Rigidbody _rb;
     private InputManager _inputManager;
     private RestartLevel _restartLevel;
-
+    private GameManager _gameManager;
+    private ParticleManager _particleManager;
+    
     private static readonly int Fall = Animator.StringToHash("fall");
     private static readonly int Die = Animator.StringToHash("die");
 
@@ -17,14 +19,22 @@ public class CollisionDetect : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _inputManager = GetComponent<InputManager>();
         _restartLevel = GetComponent<RestartLevel>();
+        _gameManager = FindObjectOfType<GameManager>();
+        _particleManager = GetComponent<ParticleManager>();
     }
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.transform.CompareTag("Obstacle"))
+        if (other.transform.CompareTag("Opponent"))
+        {
+            _particleManager.PlayCollisionParticle();
+        }
+        else if (other.transform.CompareTag("Obstacle"))
         {
             Debug.Log("Obstacle");
+            _particleManager.PlayDeathParticle();
             _animator.SetTrigger(Die);
+            _gameManager.DeathSound();
             _restartLevel.StartCoroutine(nameof(RestartLevel.StartLateRestart));
         }
     }

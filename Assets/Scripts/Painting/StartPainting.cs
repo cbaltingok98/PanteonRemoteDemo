@@ -9,6 +9,7 @@ public class StartPainting : MonoBehaviour
     
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Transform paintingPosition;
+    [SerializeField] private ParticleSystem explosionParticle;
     
     private float _speed;
     private bool _move;
@@ -38,6 +39,7 @@ public class StartPainting : MonoBehaviour
         _animator.SetTrigger(Dance);
         _uiManager.IsActiveWallPercent(true);
         _uiManager.PaintingJoystick();
+        explosionParticle.Play();
         _gameManager.IsActivePainting(true);
     }
     

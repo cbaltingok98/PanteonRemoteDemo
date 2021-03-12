@@ -10,6 +10,7 @@ public class RankingManager : MonoBehaviour
     private GameManager _gameManager;
 
     private int _currentRank;
+    private bool load;
     private void Awake()
     {
         _uiManager = FindObjectOfType<UIManager>();
@@ -18,14 +19,24 @@ public class RankingManager : MonoBehaviour
 
     private void Start()
     {
-        _opponents = FindObjectsOfType<MoveToGoalAgent>();
-        _player = FindObjectOfType<InputManager>().GetComponent<Transform>();
+        load = true;
+        
     }
 
     private void FixedUpdate()
     {
+        if (load)
+            LoadPlayers();
+        
         if(_gameManager.GetCurrentState() == GameState.Play)
             CheckRank();
+    }
+
+    private void LoadPlayers()
+    {
+        load = false;
+        _opponents = FindObjectsOfType<MoveToGoalAgent>();
+        _player = FindObjectOfType<InputManager>().GetComponent<Transform>();
     }
 
     private void CheckRank()

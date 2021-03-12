@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject joystick;
     [SerializeField] private GameObject playerVictory;
     [SerializeField] private GameObject aiVictory;
+    [SerializeField] private GameObject tutorial;
+    [SerializeField] private GameObject paintTutorial;
     [SerializeField] private Text currentRank;
     [SerializeField] private Text finishRank;
     [SerializeField] private Text coin;
@@ -53,11 +55,17 @@ public class UIManager : MonoBehaviour
     public void IsActiveWallPercent(bool set)
     {
         wallFillPercentTxt.SetActive(set);
+        IsActivePaintTutorial(set);
     }
 
     public void WallPercentUpdate(string updatedText)
     {
         wallFillPercentTxt.GetComponentInChildren<Text>().text = updatedText;
+    }
+
+    private void IsActivePaintTutorial(bool set)
+    {
+        paintTutorial.SetActive(set);
     }
 
     public void UpdateRankText(string rank)
@@ -77,6 +85,11 @@ public class UIManager : MonoBehaviour
 
     public void PaintingJoystick()
     {
-        joystick.GetComponent<Image>().enabled = false;
+        joystick.SetActive(false);
+    }
+
+    public void SetTutorialUI(bool set)
+    {
+        tutorial.SetActive(set);
     }
 }

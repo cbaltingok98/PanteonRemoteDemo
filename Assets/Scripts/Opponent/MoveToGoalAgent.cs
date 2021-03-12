@@ -15,6 +15,7 @@ public class MoveToGoalAgent : Agent
     private Rigidbody _rb;
     private Animator _animator;
     private GameManager _gameManager;
+    private ParticleManager _particleManager;
 
     private float _horizontal;
     private float _vertical;
@@ -32,6 +33,7 @@ public class MoveToGoalAgent : Agent
         _rb = GetComponent<Rigidbody>();
         _animator = GetComponentInChildren<Animator>();
         _gameManager = FindObjectOfType<GameManager>();
+        _particleManager = GetComponent<ParticleManager>();
         _obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
         _targetPosition = GameObject.FindWithTag("Finish");
         _rotator = GameObject.Find("Rotator");
@@ -91,15 +93,15 @@ public class MoveToGoalAgent : Agent
 
         switch (_vertical)
         {
-            case 0: addForce.z = 0f; break;
-            case 1: addForce.z = -1f; break;
-            case 2: addForce.z = 1f; break;
+            case 2: addForce.z = 0f; break;
+            case 0: addForce.z = -1f; break;
+            case 1: addForce.z = 1f; break;
         }
         
         if(_agentState == GameState.Play && _gameManager.GetCurrentState() == GameState.Play)
             HandleMovement(addForce);
 
-        AddReward(-1f / MaxStep);
+        //AddReward(-1f / MaxStep);
     }
 
     private void HandleMovement(Vector3 addForce)
@@ -126,9 +128,9 @@ public class MoveToGoalAgent : Agent
         }
         switch (Mathf.RoundToInt(Input.GetAxisRaw("Vertical")))
         {
-            case -1: actionsOut[1] = 1; break;
-            case 0: actionsOut[1] = 0; break;
-            case +1: actionsOut[1] = 2; break;
+            case -1: actionsOut[1] = 0; break;
+            case 0: ; break;
+            case +1: actionsOut[1] = 1; break;
         }
     }
 
@@ -136,8 +138,13 @@ public class MoveToGoalAgent : Agent
     {
         if (other.transform.CompareTag("Obstacle"))
         {
-            SetReward(-0.5f);
+            SetReward(-1f);
+            _particleManager.PlayDeathParticle();
             StartCoroutine(LateRestart());
+        }
+        else if (other.transform.CompareTag("Player"))
+        {
+            _particleManager.PlayCollisionParticle();
         }
     }
 
@@ -150,7 +157,7 @@ public class MoveToGoalAgent : Agent
         }
         else if (other.transform.CompareTag("Finish"))
         {
-            //SetReward(+1f);
+            //SetReward(+2f);
             //EndEpisode();
             _gameManager.AIVictory();
         }

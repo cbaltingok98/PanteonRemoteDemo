@@ -1,0 +1,23 @@
+{
+    "RunToFinish": {
+        "checkpoints": [
+            {
+                "steps": 84938,
+                "file_path": "results/TrainAItoFinishLast5/RunToFinish/RunToFinish-84938.onnx",
+                "reward": null,
+                "creation_time": 1615552399.031065
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 84938,
+            "file_path": "results/TrainAItoFinishLast5/RunToFinish.onnx",
+            "reward": null,
+            "creation_time": 1615552399.031065
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.2.0",
+        "mlagents_version": "0.24.1",
+        "torch_version": "1.7.1"
+    }
+}

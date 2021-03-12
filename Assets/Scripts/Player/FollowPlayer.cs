@@ -17,8 +17,8 @@ public class FollowPlayer : MonoBehaviour
     public void PaintingCamera()
     {
         xOffSet = -1f;
-        yOffSet = 3.7f;
-        zOffSet = 5.2f;
+        yOffSet = 4f;
+        zOffSet = 4f;
     }
 
 }
