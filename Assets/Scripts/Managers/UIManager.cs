@@ -83,9 +83,9 @@ public class UIManager : MonoBehaviour
         coin.text = set.ToString();
     }
 
-    public void PaintingJoystick()
+    public void SetJoyStick(bool set)
     {
-        joystick.SetActive(false);
+        joystick.SetActive(set);
     }
 
     public void SetTutorialUI(bool set)

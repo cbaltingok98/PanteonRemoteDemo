@@ -38,7 +38,6 @@ public class StartPainting : MonoBehaviour
         SetCamera();
         _animator.SetTrigger(Dance);
         _uiManager.IsActiveWallPercent(true);
-        _uiManager.PaintingJoystick();
         explosionParticle.Play();
         _gameManager.IsActivePainting(true);
     }

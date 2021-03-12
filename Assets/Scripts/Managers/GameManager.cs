@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
         PlayGameTheme();
 #if UNITY_EDITOR
         _useKeyboard = true;
+        _uiManager.SetJoyStick(false);
 #else
         _useKeyboard = false;        
 #endif
